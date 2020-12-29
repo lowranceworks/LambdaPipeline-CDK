@@ -1,18 +1,3 @@
-/*
-Let's define the AWS CloudFormation stack that will create the Lambda function, the stack that we'll deploy in our pipeline.
-
-We need some way to get a reference to the Lambda function we'll be deploying. 
-This code is built by the pipeline, and the pipeline passes us a reference to it as AWS CloudFormation parameters.
-We get it using the fromCfnParameters() method and store it as an attribute named lambdaCode, where it can be picked up by the deployment stage of the pipeline.
-
-The example also uses the CodeDeploy support for blue-green deployments to Lambda, transferring traffic to the new version in 10-percent increments every minute.
-As blue-green deployment can only operate on aliases, not on the function directly, we create an alias for our function, named Prod.
-
-The alias uses a Lambda version obtained using the function's currentVersion property.
-This ensures that every invocation of the AWS CDK code publishes a new version of the function.
-
-If the Lambda function needs any other resources when executing, such as an Amazon S3 bucket, Amazon DynamoDB table, or Amazon API Gateway, you'd declare those resources here.
-*/
 import * as codedeploy from '@aws-cdk/aws-codedeploy';
 import * as lambda from '@aws-cdk/aws-lambda';
 import { App, Stack, StackProps } from '@aws-cdk/core';
